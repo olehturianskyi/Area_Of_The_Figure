@@ -8,6 +8,16 @@ namespace Area_Of_The_Figure
 {
     internal class Program
     {
+
+        //  переименовать названия методов, чтобы они содержали в себе глагол и отвечали на вопрос что метод делает
+        //  изучить как работат методы с параметрами на примере методов для трапеции и считывания с консоли 
+        
+        // вынесли этот код в отдельный метод, чтобы он не дубрировался в каждом кейсе
+        // Console.SetCursorPosition(5, 14);
+        // Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");  
+
+
+
         static void Main(string[] args)
         {
             Console.Title = "Calculating the area of a geometric figure";
@@ -23,7 +33,7 @@ namespace Area_Of_The_Figure
             PressAnyKey();
 
             SetBackGround();
-            string choise = MainMenu();
+            string choise = BuildMainMenu();
             SetBackGround();
 
             double result;
@@ -123,7 +133,7 @@ namespace Area_Of_The_Figure
             Console.ReadKey();
 
         }
-        public static string MainMenu()
+        public static string BuildMainMenu()
         {
             Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(24, 10); Console.Write("Calculate the area of a figure:");
@@ -171,17 +181,24 @@ namespace Area_Of_The_Figure
         }
         public static double Trapezoid()
         {
-            Console.SetCursorPosition(5, 8);
-            Console.Write(" Input a => ");
-            double a = double.Parse(Console.ReadLine());
-            Console.SetCursorPosition(5, 10);
-            Console.Write(" Input h => ");
-            double b = double.Parse(Console.ReadLine());
-            Console.SetCursorPosition(5, 12);
-            Console.Write(" Input h => ");
-            double h = double.Parse(Console.ReadLine());
-            double s = ((a + b) / 2) * h;
-            return s;
+            double a = GetValueFromConsole(" Input a => ", 5, 8);
+            double b = GetValueFromConsole(" Input b => ", 5, 10);
+            double h = GetValueFromConsole(" Input h => ", 5, 12);
+
+            return GetTrapezoidSquare(a, b, h);
+        }
+
+        public static double GetTrapezoidSquare(double a, double b, double h)
+        {
+            return ((a + b) / 2) * h;
+        }
+
+        public static double GetValueFromConsole(string writeText, int left, int top)
+        {
+            Console.SetCursorPosition(left, top);
+            Console.Write(writeText);
+            double value = double.Parse(Console.ReadLine());
+            return value;
         }
     }
 }
