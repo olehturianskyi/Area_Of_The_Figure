@@ -154,9 +154,11 @@ namespace Area_Of_The_Figure
             }
             while (!parseResult)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.SetCursorPosition(15, 20); Console.Write("Incorrect Input. Please type only numbers.");
                 Console.SetCursorPosition(15, 21); Console.Write("   Letters and signs are prohibited!");
                 Console.SetCursorPosition(46, 11);
+                Console.ForegroundColor = ConsoleColor.Black;
                 parseResult = int.TryParse(Console.ReadLine(), out side);               
             }
             ch = Convert.ToString(side);
