@@ -40,24 +40,20 @@ namespace Area_Of_The_Figure
             switch (choise)
             {
                 case "1":
-                    result = Circle();
-                    Console.SetCursorPosition(5, 14);
-                    Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
+                    result = CalculateByCircle();
+                    OutputResult(result);
                     break;
                 case "2":
-                    result = Rectangle();
-                    Console.SetCursorPosition(5, 14);
-                    Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
+                    result = CalculateByRectangle();
+                    OutputResult(result);
                     break;
                 case "3":
-                    result = Triangle();
-                    Console.SetCursorPosition(5, 14);
-                    Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
+                    result = CalculateByTriangle();
+                    OutputResult(result);
                     break;
                 case "4":
-                    result = Trapezoid();
-                    Console.SetCursorPosition(5, 14);
-                    Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
+                    result = CalculateByTrapezoid();
+                    OutputResult(result);
                     break;
                 default:
                     //the code is executed if the expression does not have any of the above values
@@ -148,57 +144,62 @@ namespace Area_Of_The_Figure
             string ch = Console.ReadLine();
             return ch;
         }
-        public static double Circle()
+       //*******************************************************
+        public static double CalculateByCircle()
         {
-            Console.SetCursorPosition(5, 8);
-            Console.Write(" Input RADIUS => ");
-            double r = double.Parse(Console.ReadLine());
-            double s = Math.PI * Math.Pow(r, 2);
-            return s;
+            double r = GetValueFromConsole(" Input RADIUS => ", 5, 8);
+            return GetCircleSquare(r);
         }
-        public static double Triangle()
+        public static double GetCircleSquare(double r)
         {
-            Console.SetCursorPosition(5, 8);
-            Console.Write(" Input a => ");
-            double a = double.Parse(Console.ReadLine());
-            Console.SetCursorPosition(5, 10);
-            Console.Write(" Input h => ");
-            double h = double.Parse(Console.ReadLine());
-            double s = (a * h) / 2;
-            return s;
-
+            return Math.PI * Math.Pow(r, 2);
         }
-        public static double Rectangle()
+        //*****************************************************
+        public static double CalculateByTriangle()
         {
-            Console.SetCursorPosition(5, 8);
-            Console.Write(" Input a => ");
-            double a = double.Parse(Console.ReadLine());
-            Console.SetCursorPosition(5, 10);
-            Console.Write(" Input b => ");
-            double b = double.Parse(Console.ReadLine());
-            double s = a * b;
-            return s;
+            double a = GetValueFromConsole(" Input a => ", 5, 8);
+            double h = GetValueFromConsole(" Input h => ", 5, 10);
+            return GetRectangleSquare(a, h);
         }
-        public static double Trapezoid()
+        public static double GetTriangleSquare(double a, double h)
+        {
+            return (a * h)/2;
+        }
+        //*****************************************************
+        public static double CalculateByRectangle()
+        {
+            double a = GetValueFromConsole(" Input a => ", 5, 8);
+            double b = GetValueFromConsole(" Input b => ", 5, 10);
+            return GetRectangleSquare(a, b);
+        }
+        public static double GetRectangleSquare(double a, double b)
+        {
+            return a*b;
+        }
+        //*****************************************************
+        public static double CalculateByTrapezoid()
         {
             double a = GetValueFromConsole(" Input a => ", 5, 8);
             double b = GetValueFromConsole(" Input b => ", 5, 10);
             double h = GetValueFromConsole(" Input h => ", 5, 12);
-
             return GetTrapezoidSquare(a, b, h);
         }
-
         public static double GetTrapezoidSquare(double a, double b, double h)
         {
             return ((a + b) / 2) * h;
         }
-
+        //##########################################################
         public static double GetValueFromConsole(string writeText, int left, int top)
         {
             Console.SetCursorPosition(left, top);
             Console.Write(writeText);
             double value = double.Parse(Console.ReadLine());
             return value;
+        }
+        public static void OutputResult(double result)
+        {
+            Console.SetCursorPosition(5, 14);
+            Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
         }
     }
 }
