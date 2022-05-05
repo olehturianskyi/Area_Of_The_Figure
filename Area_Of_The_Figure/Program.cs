@@ -11,7 +11,7 @@ namespace Area_Of_The_Figure
 
         //  переименовать названия методов, чтобы они содержали в себе глагол и отвечали на вопрос что метод делает
         //  изучить как работат методы с параметрами на примере методов для трапеции и считывания с консоли 
-        
+
         // вынесли этот код в отдельный метод, чтобы он не дубрировался в каждом кейсе
         // Console.SetCursorPosition(5, 14);
         // Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");  
@@ -33,12 +33,12 @@ namespace Area_Of_The_Figure
             PressAnyKey();
 
             SetBackGround();
-           
+
             string choise = BuildMainMenu();
 
 
             SetBackGround();
-            
+
             double result;
             switch (choise)
             {
@@ -60,7 +60,7 @@ namespace Area_Of_The_Figure
                     break;
                 default:
                     //Incorrect Input. Please type only numbers. Letters and signs are prohibited!
-                    
+
                     break;
             }
             PressAnyKey();
@@ -146,30 +146,23 @@ namespace Area_Of_The_Figure
             Console.SetCursorPosition(33, 18); Console.Write("4-trapezoid");
             Console.SetCursorPosition(46, 11);
             string ch = Console.ReadLine();
-
-            int side;
-            bool parseResult = Int32.TryParse(ch, out side);
-
+        
+            bool parseResult = Int32.TryParse(ch, out int side);
+            if (side < 1 || side > 4)
+            {
+                parseResult = false;
+            }
             while (!parseResult)
             {
                 Console.SetCursorPosition(15, 20); Console.Write("Incorrect Input. Please type only numbers.");
                 Console.SetCursorPosition(15, 21); Console.Write("   Letters and signs are prohibited!");
                 Console.SetCursorPosition(46, 11);
-                parseResult = int.TryParse(Console.ReadLine(), out side);
-              if (side < 1 || side >4)
-                {
-                    parseResult = false;
-                }
+                parseResult = int.TryParse(Console.ReadLine(), out side);               
             }
-
             ch = Convert.ToString(side);
-
-
-
             return ch;
-
         }
-       //*******************************************************
+        //*******************************************************
         public static double CalculateByCircle()
         {
             double r = GetValueFromConsole(" Input RADIUS => ", 5, 8);
@@ -188,7 +181,7 @@ namespace Area_Of_The_Figure
         }
         public static double GetTriangleSquare(double a, double h)
         {
-            return (a * h)/2;
+            return (a * h) / 2;
         }
         //*****************************************************
         public static double CalculateByRectangle()
@@ -199,7 +192,7 @@ namespace Area_Of_The_Figure
         }
         public static double GetRectangleSquare(double a, double b)
         {
-            return a*b;
+            return a * b;
         }
         //*****************************************************
         public static double CalculateByTrapezoid()
@@ -226,8 +219,5 @@ namespace Area_Of_The_Figure
             Console.SetCursorPosition(5, 14);
             Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
         }
-
-        
-
     }
 }
