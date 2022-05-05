@@ -33,9 +33,12 @@ namespace Area_Of_The_Figure
             PressAnyKey();
 
             SetBackGround();
+           
             string choise = BuildMainMenu();
-            SetBackGround();
 
+
+            SetBackGround();
+            
             double result;
             switch (choise)
             {
@@ -56,7 +59,8 @@ namespace Area_Of_The_Figure
                     OutputResult(result);
                     break;
                 default:
-                    //the code is executed if the expression does not have any of the above values
+                    //Incorrect Input. Please type only numbers. Letters and signs are prohibited!
+                    
                     break;
             }
             PressAnyKey();
@@ -142,7 +146,28 @@ namespace Area_Of_The_Figure
             Console.SetCursorPosition(33, 18); Console.Write("4-trapezoid");
             Console.SetCursorPosition(46, 11);
             string ch = Console.ReadLine();
+
+            int side;
+            bool parseResult = Int32.TryParse(ch, out side);
+
+            while (!parseResult)
+            {
+                Console.SetCursorPosition(15, 20); Console.Write("Incorrect Input. Please type only numbers.");
+                Console.SetCursorPosition(15, 21); Console.Write("   Letters and signs are prohibited!");
+                Console.SetCursorPosition(46, 11);
+                parseResult = int.TryParse(Console.ReadLine(), out side);
+              if (side < 1 || side >4)
+                {
+                    parseResult = false;
+                }
+            }
+
+            ch = Convert.ToString(side);
+
+
+
             return ch;
+
         }
        //*******************************************************
         public static double CalculateByCircle()
@@ -201,5 +226,8 @@ namespace Area_Of_The_Figure
             Console.SetCursorPosition(5, 14);
             Console.Write("The area of the figure is " + Convert.ToString(result) + " square units");
         }
+
+        
+
     }
 }
